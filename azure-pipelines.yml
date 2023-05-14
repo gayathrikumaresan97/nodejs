@@ -36,5 +36,5 @@ stages:
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
         buildContext: '$(System.DefaultWorkingDirectory)'
-        tags: '$(tag)'
+        tags: '$(tag):latest'
     
