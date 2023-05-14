@@ -36,5 +36,16 @@ stages:
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
         buildContext: '$(System.DefaultWorkingDirectory)'
-        tags: '$(tag):latest'
+        tags: |
+          $(tag)
+    - task: CopyFiles@2
+      inputs:
+        Contents: '$(tag)'
+        TargetFolder: '$(build.artifactstagingdirectory)'
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
+    
     
